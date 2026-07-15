@@ -10,8 +10,31 @@
 - 운영자(관리자)가 별도 도구 설치 없이 빠르게 데이터 상태를 점검할 수 있도록 지원
 
 ## 현재 상태
-- 프로젝트 초기 단계로 소스 코드는 아직 작성되지 않음
-- Python 3.13 가상환경(.venv)만 구성되어 있음
+- PoC 1차 구현 완료
+- Python 3.13 가상환경(.venv) 구성됨
+
+## 프로젝트 구조
+```
+datamonitor/
+  reader.py   # JSON 파일 로드, 최종 수정 시각 조회
+  monitor.py  # DataMonitor 클래스 - 상태 조회, 변경 감지, 콘솔 폴링 루프
+  cli.py      # 커맨드라인 진입점 (python -m datamonitor.cli <file> --interval N)
+data/
+  sample_data.json  # 동작 확인용 샘플 데이터
+tests/
+  test_reader.py
+  test_monitor.py
+```
+
+## 실행 방법
+```
+python -m datamonitor.cli data/sample_data.json --interval 2
+```
+
+## 테스트 실행
+```
+pytest -v
+```
 
 ## 데이터 소스
 - 로컬에 저장된 JSON 파일
