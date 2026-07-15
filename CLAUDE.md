@@ -17,18 +17,24 @@
 ```
 datamonitor/
   reader.py   # JSON 파일 로드, 최종 수정 시각 조회
-  monitor.py  # DataMonitor 클래스 - 상태 조회, 변경 감지, 콘솔 폴링 루프
-  cli.py      # 커맨드라인 진입점 (python -m datamonitor.cli <file> --interval N)
+  monitor.py  # DataMonitor 클래스 - 상태 조회, 변경 감지, 콘솔 폴링 루프 (watch 모드)
+  menu.py     # 조회 메뉴 - 메뉴 선택 시 현재 데이터를 온디맨드로 조회 (menu 모드)
+  cli.py      # 커맨드라인 진입점, watch/menu 서브커맨드 제공
 data/
   sample_data.json  # 동작 확인용 샘플 데이터
 tests/
   test_reader.py
   test_monitor.py
+  test_menu.py
 ```
 
 ## 실행 방법
 ```
-python -m datamonitor.cli data/sample_data.json --interval 2
+# 실시간 폴링 모니터링
+python -m datamonitor.cli watch data/sample_data.json --interval 2
+
+# 조회 메뉴 (메뉴에서 1번 선택 시 현재 데이터 조회, 2번 선택 시 종료)
+python -m datamonitor.cli menu data/sample_data.json
 ```
 
 ## 테스트 실행
